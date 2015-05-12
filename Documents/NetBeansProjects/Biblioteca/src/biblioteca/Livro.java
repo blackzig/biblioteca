@@ -21,7 +21,7 @@ public class Livro {
     private Editora     editora;
     private Categoria   categoria;
     private Autor       autor;
-         
+    
     /**
      * @return the ISBN
      */
