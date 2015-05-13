@@ -7,10 +7,8 @@ package biblioteca;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -31,15 +29,15 @@ public class Editora {
     public Double gastoTotal(){
         int tamanhoLista = editora.size();
         for(int i=0; i<tamanhoLista; i++){
-            System.out.println("editora "+editora.get(i));
-            System.out.println("preço "+preco.get(i));
+            System.out.println("Editora: "+editora.get(i));
+            System.out.println("Preço: "+preco.get(i));
             System.out.println("*****************************");
         }
         return custo;
     }
     
     @SuppressWarnings("empty-statement")
-    public void correrListaEditora(){
+    public void separarPorEditora(){
        Set<Object> seen = new HashSet<>();
         for (Livro p : this.getLivros()) {
             final Livro thisLivro = p;
@@ -77,7 +75,7 @@ public class Editora {
         
         //http://stackoverflow.com/questions/10755632/finding-duplicate-entries-in-collection
 
-    }//fim correListaEditora
+    }//fim separarPorEditora
     
     /**
      * @return the nome

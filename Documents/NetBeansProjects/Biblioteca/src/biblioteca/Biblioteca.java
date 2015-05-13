@@ -31,7 +31,11 @@ public class Biblioteca {
         try {
 	    instanciarObjetos();
             //Por editora
-            e.correrListaEditora();
+            e.separarPorEditora();
+            //Por categoria
+            cat.separarPorCategoria();
+            //Por autor
+            a.separarPorAutor();
             
         } catch (Exception ex) {
             System.out.println("erro "+ex.getMessage());
@@ -103,9 +107,9 @@ public class Biblioteca {
             l1.setCategoria(cat1);
             l1.setAutor(a1);
             e.getLivros().add(l1);
-            c1.getLivros().add(l1);
-            cat1.getLivros().add(l1);
-            a1.getLivros().add(l1);
+            c.getLivros().add(l1);
+            cat.getLivros().add(l1);
+            a.getLivros().add(l1);
             livros = new HashMap<>();
             livros.put(c1.getCodigo(), l1);
             
@@ -144,9 +148,9 @@ public class Biblioteca {
             l2.setCategoria(cat2);
             l2.setAutor(a2);
             e.getLivros().add(l2);
-            c2.getLivros().add(l2);
-            cat2.getLivros().add(l2);
-            a2.getLivros().add(l2);
+            c.getLivros().add(l2);
+            cat.getLivros().add(l2);
+            a.getLivros().add(l2);
             livros = new HashMap<>();
             livros.put(c2.getCodigo(), l2);
             
