@@ -27,7 +27,6 @@ public class Hospital {
     private static Map<Long, HospitalGeral>     hospitais;
     
     private static final Mae            m   = new Mae();
-    private static final BebePrematuro  bp   = new BebePrematuro();
     private static final Medico         med = new Medico();
     private static final Parto          p   = new Parto();
     private static final Especialidade  e   = new Especialidade();
@@ -37,15 +36,81 @@ public class Hospital {
     public static void main(String[] args) {
         try {
 	    instanciarObjetos();
-            med.setarListaBebeParaEspecialidade();
+            e.setNome("neonatologia");
+            Double custo = e.faturamento();
+            System.out.println("Especialidade "+e.getNome()+" R$ "+custo);
+
         } catch (Exception ex) {
             System.out.println("erro "+ex.getMessage());
         }
     }
     
+    public static void criarMedicoEmUnidade(){
+            //Parto 3            
+            HospitalGeral h3 = new HospitalGeral();
+            h3.setNome("Quasar");
+            hospitais = new HashMap<>();
+            hospitais.put(3L, h3);
+
+            Unidade u3 = new Unidade();
+            u3.setCodigo(3L);
+            u3.setNome("UQ1");    
+            unidades = new HashMap<>();
+            unidades.put(3L, u3);            
+      
+            Especialidade e3 = new Especialidade();
+            e3.setNome("neonatologia");
+            especialidades = new HashMap<>();
+            especialidades.put(3L, e3);      
+            
+            Medico me3 =  new Medico();
+            me3.setCRM("87282");
+            me3.setNome("JULIA MARTINS BONILHA SPIRANDELI");
+            me3.setCelular("(96) 4914-9718");
+            me3.setValorHora(87.28);
+            me3.setUnidade(u3);
+            me3.setEspecialidade(e3);
+            me3.setHospitalGeral(h3);
+            h.getMedicos().add(me3);
+            u.getMedicos().add(me3);
+            e.getMedicos().add(me3);
+            medicos = new HashMap<>();
+            medicos.put(3L, me3);        
+    }
+    
     public static void instanciarObjetos() throws ParseException {
         try {            
-            //Parto 1
+            //Parto 1            
+            HospitalGeral h1 = new HospitalGeral();
+            h1.setNome("Quasar");
+            hospitais = new HashMap<>();
+            hospitais.put(1L, h1);
+
+            Unidade u1 = new Unidade();
+            u1.setCodigo(1L);
+            u1.setNome("UQ1");    
+            unidades = new HashMap<>();
+            unidades.put(1L, u1);            
+      
+            Especialidade e1 = new Especialidade();
+            e1.setNome("neonatologia");
+            especialidades = new HashMap<>();
+            especialidades.put(1L, e1);              
+           
+            Medico me1 =  new Medico();
+            me1.setCRM("87282");
+            me1.setNome("JULIA MARTINS BONILHA SPIRANDELI");
+            me1.setCelular("(96) 4914-9718");
+            me1.setValorHora(87.28);
+            me1.setUnidade(u1);
+            me1.setEspecialidade(e1);
+            me1.setHospitalGeral(h1);
+            h.getMedicos().add(me1);
+            u.getMedicos().add(me1);
+            e.getMedicos().add(me1);
+            medicos = new HashMap<>();
+            medicos.put(1L, me1);
+            
             Mae m1 = new Mae();
             m1.setNome("Emily Azevedo Ferreira");
             m1.setEndereco("Rua Cândido Portinari, 116, Campinas-SP, 13088-007");
@@ -53,15 +118,7 @@ public class Hospital {
             Date date = transformarStringToDate("17/07/1995");
             m1.setDataNascimento(date);
             maes = new HashMap<>();
-            maes.put(1L, m1);
-            
-            Medico me1 =  new Medico();
-            me1.setCRM("87282");
-            me1.setNome("JULIA MARTINS BONILHA SPIRANDELI");
-            me1.setCelular("(96) 4914-9718");
-            me1.setValorHora(87.28);
-            medicos = new HashMap<>();
-            medicos.put(1L, me1);
+            maes.put(1L, m1);            
             
             Parto p1 = new Parto();
             int hp = duracaoParto();
@@ -99,29 +156,6 @@ public class Hospital {
             bebes = new HashMap<>();
             bebes.put(1L, bp1);
             
-            HospitalGeral h1 = new HospitalGeral();
-            h1.setNome("Quasar");
-            hospitais = new HashMap<>();
-            hospitais.put(1L, h1);
-
-            Unidade u1 = new Unidade();
-            u1.setCodigo(1L);
-            u1.setNome("UQ1");    
-            unidades = new HashMap<>();
-            unidades.put(1L, u1);            
-      
-            Especialidade e1 = new Especialidade();
-            e1.setNome("neonatologia");
-            e1.setHospital(h1);
-            e1.setUnidade(u1);
-            e1.setMedico(me1);
-            h.getEspecialidades().add(e1);
-            u.getEspecialidades().add(e1);
-            med.getEspecialidades().add(e1);
-            especialidades = new HashMap<>();
-            especialidades.put(1L, e1);           
-               
-            //System.out.println("especialidades "+especialidades.size());
 //******************************************************************************
 
 //            copiarLivro();

@@ -14,22 +14,20 @@ import java.util.Collection;
  */
 public class Especialidade {
   
-    private String nome;
+    private String nome; 
     
-    private HospitalGeral   hospital;
-    private Unidade         unidade;
-    private BebePrematuro   bebePrematuro;
-    private Medico          medico;
+    Double         custo=0.0;
     
-    private Collection<Bebe> bebes;      
+    private Collection<Medico> medicos;    
     
     public Double faturamento(){
-        System.out.println("this "+this.getNome());
-        for(Bebe b: this.getBebes()){
-            Double custo = b.getMedico().getValorHora();
-            System.out.println("Custo "+custo);
+        String especialidade = this.getNome();
+        for(Medico me: this.getMedicos()){
+            if(me.getEspecialidade().getNome().equals(especialidade)){
+                custo+=me.getValorHora();
+            }
         }
-        return 0.0;
+        return custo;         
     }
 
 
@@ -48,76 +46,20 @@ public class Especialidade {
     }
 
     /**
-     * @return the hospital
+     * @return the medicos
      */
-    public HospitalGeral getHospital() {
-        return hospital;
+    public Collection<Medico> getMedicos() {
+        if (this.medicos == null) {
+            this.setMedicos(new ArrayList<>());
+        }               
+        return medicos;
     }
 
     /**
-     * @param hospital the hospital to set
+     * @param medicos the medicos to set
      */
-    public void setHospital(HospitalGeral hospital) {
-        this.hospital = hospital;
-    }
-
-    /**
-     * @return the unidade
-     */
-    public Unidade getUnidade() {
-        return unidade;
-    }
-
-    /**
-     * @param unidade the unidade to set
-     */
-    public void setUnidade(Unidade unidade) {
-        this.unidade = unidade;
-    }
-
-    /**
-     * @return the bebePrematuro
-     */
-    public BebePrematuro getBebePrematuro() {
-        return bebePrematuro;
-    }
-
-    /**
-     * @param bebePrematuro the bebePrematuro to set
-     */
-    public void setBebePrematuro(BebePrematuro bebePrematuro) {
-        this.bebePrematuro = bebePrematuro;
-    }
-
-    /**
-     * @return the bebes
-     */
-    public Collection<Bebe> getBebes() {
-        if (this.bebes == null) {
-            this.setBebes(new ArrayList<>());
-        }        
-        return bebes;
-    }
-
-    /**
-     * @param bebes the bebes to set
-     */
-    public void setBebes(Collection<Bebe> bebes) {
-        this.bebes = bebes;
-    }
-
-    /**
-     * @return the medico
-     */
-    public Medico getMedico() {
-        return medico;
-    }
-
-    /**
-     * @param medico the medico to set
-     */
-    public void setMedico(Medico medico) {
-        this.medico = medico;
+    public void setMedicos(Collection<Medico> medicos) {
+        this.medicos = medicos;
     }
     
 }

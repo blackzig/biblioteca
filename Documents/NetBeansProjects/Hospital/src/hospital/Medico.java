@@ -19,20 +19,12 @@ public class Medico {
     private String celular;
     private Double valorHora;
     
-    private Collection<Bebe> bebes;    
-    private Collection<Especialidade> especialidades; 
-       
-    public void setarListaBebeParaEspecialidade(){
-        Especialidade e = new Especialidade();
-        e.setBebes(this.getBebes());
-
-        for(Especialidade e1: this.getEspecialidades()){
-          //  System.out.println("es "+e1.getNome());
-            e.setNome(e1.getNome());
-            e.faturamento();
-        }
-    }
+    private Especialidade especialidade;
+    private Unidade unidade;
+    private HospitalGeral hospitalGeral;
     
+    private Collection<Bebe> bebes;    
+
     /**
      * @return the CRM
      */
@@ -107,20 +99,46 @@ public class Medico {
     }
 
     /**
-     * @return the especialidades
+     * @return the especialidade
      */
-    public Collection<Especialidade> getEspecialidades() {
-        if (this.especialidades == null) {
-            this.setEspecialidades(new ArrayList<>());
-        }        
-        return especialidades;
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
     /**
-     * @param especialidades the especialidades to set
+     * @param especialidade the especialidade to set
      */
-    public void setEspecialidades(Collection<Especialidade> especialidades) {
-        this.especialidades = especialidades;
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
     }
+
+    /**
+     * @return the unidade
+     */
+    public Unidade getUnidade() {
+        return unidade;
+    }
+
+    /**
+     * @param unidade the unidade to set
+     */
+    public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
+    }
+
+    /**
+     * @return the hospitalGeral
+     */
+    public HospitalGeral getHospitalGeral() {
+        return hospitalGeral;
+    }
+
+    /**
+     * @param hospitalGeral the hospitalGeral to set
+     */
+    public void setHospitalGeral(HospitalGeral hospitalGeral) {
+        this.hospitalGeral = hospitalGeral;
+    }
+
     
 }

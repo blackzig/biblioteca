@@ -16,7 +16,7 @@ public class HospitalGeral {
  
     private String nome;
     
-    private Collection<Especialidade> especialidades;       
+    private Collection<Medico> medicos;       
     
     public Double faturamento(){
         return 0.0;
@@ -37,20 +37,21 @@ public class HospitalGeral {
     }
 
     /**
-     * @return the especialidades
+     * @return the medicos
      */
-    public Collection<Especialidade> getEspecialidades() {
-        if (this.especialidades == null) {
-            this.setEspecialidades(new ArrayList<>());
-        }        
-        return especialidades;
+    public Collection<Medico> getMedicos() {
+        if (this.medicos == null) {
+            this.setMedicos(new ArrayList<>());
+        }               
+        return medicos;
     }
 
     /**
-     * @param especialidades the especialidades to set
+     * @param medicos the medicos to set
      */
-    public void setEspecialidades(Collection<Especialidade> especialidades) {
-        this.especialidades = especialidades;
+    public void setMedicos(Collection<Medico> medicos) {
+        this.medicos = medicos;
     }
-    
+
+
 }
