@@ -6,7 +6,6 @@
 package biblioteca;
 
 import java.text.ParseException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,11 +30,18 @@ public class Biblioteca {
         try {
 	    instanciarObjetos();
             //Por editora
-            e.separarPorEditora();
+            e.setNome("Elsevier Acadêmico");
+            Double custoE = e.gastoTotal();
+            System.out.println("Custo da editora "+e.getNome()+" é de R$ "+custoE);
             //Por categoria
-            cat.separarPorCategoria();
+            cat.setDescricao("Informática");
+            Double custoC = cat.gastoTotal();
+            System.out.println("Custo da categoria "+cat.getDescricao()+" é de R$ "+custoC);
             //Por autor
-            a.separarPorAutor();
+            a.setNome("Johanna Basford");
+            Double custoA = a.gastoTotal();
+            System.out.println("Custo do autor "+a.getNome()+" é de R$ "+custoA);
+
             
         } catch (Exception ex) {
             System.out.println("erro "+ex.getMessage());
@@ -156,67 +162,8 @@ public class Biblioteca {
             
             //************************************************************************************************
             //livro 3
-            //Livro l2 = new Livro();
-//            e.getLivros().stream().forEach((ed) -> {
-//                
-//            });
             
-     copiarLivro();
-            
-//            l1.setISBN("978-8535248821");
-//            l1.setTitulo("Engenharia de Software");
-//            l1.setAno(2011L);
-//            l1.setEditora(e1);
-//            l1.setCopia(c1);
-//            l1.setCategoria(cat1);
-//            l1.setAutor(a1);
-//            e.getLivros().add(l1);
-//            c1.getLivros().add(l1);
-//            cat1.getLivros().add(l1);
-//            a1.getLivros().add(l1);
-//            livros = new HashMap<>();           
-//            livros.put(c2.getCodigo()+1, l1);      
-            
-            
-//            Copia c3 = new Copia();
-//            c3.setCodigo(3L);
-//            c3.setPreco(28.41);
-//            copias = new HashMap<>();
-//            copias.put(c3.getCodigo(), c3);
-//
-//            Editora e3 = new Editora();
-//            e3.setNome("Sextante");
-//            editoras = new HashMap<>();
-//            editoras.put(c3.getCodigo(), e3);
-//
-//            Categoria cat3 = new Categoria();
-//            cat3.setCodigo(c3.getCodigo());
-//            cat3.setDescricao("AutoAjuda");
-//            categorias = new HashMap<>();
-//            categorias.put(c3.getCodigo(), cat3);
-//
-//            Autor a3 = new Autor();
-//            a2.setNome("Johanna Basford");
-//            codigoLivro = c2.getCodigo();
-//            a3.setNacionalidade("Inglesa",codigoLivro);
-//            autores = new HashMap<>();
-//            autores.put(c3.getCodigo(), a3);
-//
-//            Livro l3 = new Livro();
-//            l3.setISBN("978-8543101637");
-//            l3.setTitulo("Jardim Secreto. Livro de Colorir e Caça ao Tesouro Antiestresse");
-//            l3.setAno(2014L);
-//            l3.setEditora(e3);
-//            l3.setCopia(c3);
-//            l3.setCategoria(cat3);
-//            l3.setAutor(a3);
-//            e.getLivros().add(l3);
-//            c3.getLivros().add(l3);
-//            cat3.getLivros().add(l3);
-//            a3.getLivros().add(l3);
-//            livros = new HashMap<>();
-//            livros.put(c3.getCodigo(), l3);            
-            
+            copiarLivro();
             
         } catch (Exception ex) {
             System.out.println("erro main "+ex.getMessage());

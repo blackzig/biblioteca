@@ -7,9 +7,6 @@ package biblioteca;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -22,61 +19,19 @@ public class Categoria {
     
     private Collection<Livro>   livros;    
 
-    Double                      custo; 
-    
-    List<String> categoria      = new ArrayList<>();
-    List<Double> preco          = new ArrayList<>();
+    Double                      custo=0.0; 
     
     public Double gastoTotal(){
-        int tamanhoLista = categoria.size();
-        for(int i=0; i<tamanhoLista; i++){
-            System.out.println("Categoria: "+categoria.get(i));
-            System.out.println("Preço: "+preco.get(i));
-            System.out.println("*****************************");
+        String categoria = this.getDescricao();
+        for(Livro li: this.getLivros()){
+            if(li.getCategoria().getDescricao().equals(categoria)){
+                custo+=li.getCopia().getPreco();
+            }
         }
-        return custo;
+        
+        return custo;    
     }
     
-    @SuppressWarnings("empty-statement")
-    public void separarPorCategoria(){
-       Set<Object> seen = new HashSet<>();
-        for (Livro p : this.getLivros()) {
-            final Livro thisLivro = p;
-            class Wrap {
-                @Override
-                public int hashCode() { return thisLivro.getCategoria().getDescricao().hashCode(); }
-                @Override
-                public boolean equals(Object o) {
-                    Wrap other = (Wrap)o;
-                    return other.wrapped().getCategoria().getDescricao().equals(thisLivro.getCategoria().getDescricao());
-                }
-                public Livro wrapped() { return thisLivro; }
-            };
-            Wrap wrap = new Wrap();
-            if (seen.add(wrap)) {
-                //System.out.println(p.getCategoria().getDescricao() + " nova entrada");
-                Double precoL = p.getCopia().getPreco();
-                categoria.add(p.getCategoria().getDescricao());
-                preco.add(precoL);
-            } else {
-                //System.out.println(p.getCategoria().getDescricao() + " entrada duplicada");
-                for(int i=0; i<categoria.size(); i++){
-                    String nomeCategoria = categoria.get(i);
-                    if(nomeCategoria.equals(p.getCategoria().getDescricao())){
-                        Double pr = preco.get(i);
-                        Double valor = pr+pr;
-                        preco.remove(i);
-                        preco.add(i,valor);                          
-                    }
-                }//fim do for
-            }
-        }//for Livro p
-        
-        gastoTotal(); 
-        
-        //http://stackoverflow.com/questions/10755632/finding-duplicate-entries-in-collection
-
-    }//fim correListaEditora    
     /**
      * @return the codigo
      */
