@@ -5,6 +5,7 @@
  */
 package hospital;
 
+import static java.lang.Boolean.TRUE;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,16 +21,47 @@ public class Especialidade {
     
     private Collection<Medico> medicos;    
     
+    private Collection<Bebe> bebes;      
+    
     public Double faturamento(){
+
         String especialidade = this.getNome();
+
         for(Medico me: this.getMedicos()){
-            if(me.getEspecialidade().getNome().equals(especialidade)){
-                custo+=me.getValorHora();
-            }
+           if(me.getEspecialidade().getNome().equals(especialidade)){
+                String nomeMedico = me.getNome();
+  
+                custo = valorPartoEspecialidade(nomeMedico);                 
+           }
         }
         return custo;         
     }
 
+    public Double valorPartoEspecialidade(String $nomeMedico){
+                
+        Double valorTotalParto=0.0;
+       
+        for(Bebe be: this.getBebes()){ 
+   
+            if(be.getMedico().getNome().equals($nomeMedico)){
+                Long duracaoParto       = be.getParto().getDuracaoHoras();
+                System.out.println("Duração do parto: "+duracaoParto);
+                Double valorHoraMedico  = be.getMedico().getValorHora();
+                System.out.println("Valor hora do médico: "+valorHoraMedico);
+                Double valorParto       =  valorHoraMedico*duracaoParto;
+                System.out.println("Valor do parto sem complicação: "+valorParto);
+                if(be.getParto().getComplicado().equals(TRUE)){
+                    Double valorPartoComplicado = (valorParto*20)/100;
+                    System.out.println("Valor do parto com complicação: "+valorPartoComplicado);                    
+                    valorTotalParto             = valorParto+valorPartoComplicado;
+                }
+                else{
+                    valorTotalParto             = valorParto;                    
+                }
+            }
+        }
+        return valorTotalParto;
+    }    
 
     /**
      * @return the nome
@@ -60,6 +92,23 @@ public class Especialidade {
      */
     public void setMedicos(Collection<Medico> medicos) {
         this.medicos = medicos;
+    }
+
+    /**
+     * @return the bebes
+     */
+    public Collection<Bebe> getBebes() {
+        if (this.bebes == null) {
+            this.setBebes(new ArrayList<>());
+        }        
+        return bebes;
+    }
+
+    /**
+     * @param bebes the bebes to set
+     */
+    public void setBebes(Collection<Bebe> bebes) {
+        this.bebes = bebes;
     }
     
 }

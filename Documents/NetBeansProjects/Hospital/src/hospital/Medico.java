@@ -5,6 +5,7 @@
  */
 package hospital;
 
+import static java.lang.Boolean.TRUE;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -25,6 +26,8 @@ public class Medico {
     
     private Collection<Bebe> bebes;    
 
+    private Collection<Medico> medicos;    
+    
     /**
      * @return the CRM
      */
@@ -87,7 +90,7 @@ public class Medico {
     public Collection<Bebe> getBebes() {
         if (this.bebes == null) {
             this.setBebes(new ArrayList<>());
-        }        
+        }       
         return bebes;
     }
 
@@ -138,6 +141,23 @@ public class Medico {
      */
     public void setHospitalGeral(HospitalGeral hospitalGeral) {
         this.hospitalGeral = hospitalGeral;
+    }
+
+    /**
+     * @return the medicos
+     */
+    public Collection<Medico> getMedicos() {
+        if (this.medicos == null) {
+            this.setMedicos(new ArrayList<>());
+        }               
+        return medicos;
+    }
+
+    /**
+     * @param medicos the medicos to set
+     */
+    public void setMedicos(Collection<Medico> medicos) {
+        this.medicos = medicos;
     }
 
     

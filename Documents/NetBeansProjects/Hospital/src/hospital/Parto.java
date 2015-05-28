@@ -18,7 +18,7 @@ public class Parto {
     private Boolean complicado;
 
     private Collection<Bebe> bebes; 
-    
+        
     /**
      * @return the duracaoHoras
      */

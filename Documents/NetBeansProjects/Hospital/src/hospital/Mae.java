@@ -21,7 +21,7 @@ public class Mae {
     private Date dataNascimento;
     
     private Collection<Bebe> bebes;
-
+    
     /**
      * @return the nome
      */

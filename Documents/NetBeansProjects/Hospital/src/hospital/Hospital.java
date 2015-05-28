@@ -39,7 +39,7 @@ public class Hospital {
             e.setNome("neonatologia");
             Double custo = e.faturamento();
             System.out.println("Especialidade "+e.getNome()+" R$ "+custo);
-
+            System.out.println("*************************************************");
         } catch (Exception ex) {
             System.out.println("erro "+ex.getMessage());
         }
@@ -108,6 +108,7 @@ public class Hospital {
             h.getMedicos().add(me1);
             u.getMedicos().add(me1);
             e.getMedicos().add(me1);
+            med.getMedicos().add(me1);
             medicos = new HashMap<>();
             medicos.put(1L, me1);
             
@@ -146,13 +147,17 @@ public class Hospital {
             Double arn = alturaRecemNascido();
             bp1.setAltura(arn);
             Long pre = verificarSeEPrematuro();
-            bp1.setSemanasGestacao(pre);
+            if(pre<=36){
+                bp1.setSemanasGestacao(pre);            
+            }
             bp1.setMae(m1);
             bp1.setMedico(me1);
             bp1.setParto(p1);
+            bp1.setEspecialidade(e1);
             m.getBebes().add(bp1);
             med.getBebes().add(bp1);
             p.getBebes().add(bp1);
+            e.getBebes().add(bp1);
             bebes = new HashMap<>();
             bebes.put(1L, bp1);
             

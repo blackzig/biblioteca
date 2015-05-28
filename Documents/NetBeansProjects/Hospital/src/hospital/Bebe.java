@@ -13,14 +13,15 @@ import java.util.Date;
  */
 public class Bebe {
     
-    private String nome;
-    private Date dataNascimento;
-    private Double peso;
-    private Double altura;
+    private String  nome;
+    private Date    dataNascimento;
+    private Double  peso;
+    private Double  altura;
     
-    private Mae     mae;
-    private Medico  medico;
-    private Parto   parto;
+    private Mae             mae;
+    private Medico          medico;
+    private Parto           parto;
+    private Especialidade   especialidade;
     
     
     /**
@@ -119,6 +120,20 @@ public class Bebe {
      */
     public void setParto(Parto parto) {
         this.parto = parto;
+    }
+
+    /**
+     * @return the especialidade
+     */
+    public Especialidade getEspecialidade() {
+        return especialidade;
+    }
+
+    /**
+     * @param especialidade the especialidade to set
+     */
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
     }
     
 }
