@@ -5,6 +5,7 @@
  */
 package hospital;
 
+import static java.lang.Boolean.TRUE;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -16,11 +17,46 @@ public class HospitalGeral {
  
     private String nome;
     
-    private Collection<Medico> medicos;       
+    Double         custo=0.0;    
+    
+    private Collection<Medico>  medicos;     
+    
+    private Collection<Bebe>    bebes;       
     
     public Double faturamento(){
-        return 0.0;
+        
+        for(Medico me: this.getMedicos()){
+            String CRM = me.getCRM();
+            Double custoA = valorPartoEspecialidade(CRM);  
+            custo+=custoA;
+        }
+        return custo;   
     }
+    
+    public Double valorPartoEspecialidade(String $CRM){
+                
+        Double valorTotalParto=0.0;
+       
+        for(Bebe be: this.getBebes()){ 
+   
+            if(be.getMedico().getCRM().equals($CRM)){
+                
+                Long duracaoParto       = be.getParto().getDuracaoHoras();
+                Double valorHoraMedico  = be.getMedico().getValorHora();
+                Double valorParto       =  valorHoraMedico*duracaoParto;
+                
+                if(be.getParto().getComplicado().equals(TRUE)){
+                    Double valorPartoComplicado = (valorParto*20)/100;                 
+                    valorTotalParto             = valorParto+valorPartoComplicado;
+                }
+                else{
+                    valorTotalParto             = valorParto;                    
+                }
+                System.out.println("-----------------------------------------------------------");
+            }
+        }
+        return valorTotalParto;
+    }        
 
     /**
      * @return the nome
@@ -51,6 +87,23 @@ public class HospitalGeral {
      */
     public void setMedicos(Collection<Medico> medicos) {
         this.medicos = medicos;
+    }
+
+    /**
+     * @return the bebes
+     */
+    public Collection<Bebe> getBebes() {
+        if (this.bebes == null) {
+            this.setBebes(new ArrayList<>());
+        }        
+        return bebes;
+    }
+
+    /**
+     * @param bebes the bebes to set
+     */
+    public void setBebes(Collection<Bebe> bebes) {
+        this.bebes = bebes;
     }
 
 

@@ -7,8 +7,10 @@ package hospital;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 
@@ -33,41 +35,56 @@ public class Hospital {
     private static final Unidade        u   = new Unidade();
     private static final HospitalGeral  h   = new HospitalGeral();
     
+    static HospitalGeral h3 = new HospitalGeral();    
+    static Unidade u3 = new Unidade();    
+    static Especialidade e3 = new Especialidade();    
+    static Medico me3 = new Medico();
+            
     public static void main(String[] args) {
         try {
 	    instanciarObjetos();
-            e.setNome("neonatologia");
-            Double custo = e.faturamento();
-            System.out.println("Especialidade "+e.getNome()+" R$ "+custo);
-            System.out.println("*************************************************");
+            Collection<String> especialidadesC = new HashSet<>();
+            //remover especialidades repetidas da lista
+            for(Medico me: e.getMedicos()){
+                String especialidade = me.getEspecialidade().getNome();
+                especialidadesC.add(especialidade);
+            }            
+
+                for(String st: especialidadesC){
+                    e.setNome(st);
+                    Double custo = e.faturamento();
+                    System.out.println("Especialidade "+e.getNome()+" R$ "+custo);
+                    System.out.println("*************************************************");                       
+                }
+             
+            Double custoGeral = h.faturamento();
+            System.out.println("Faturamento geral do hospital R$ "+custoGeral);
+            
         } catch (Exception ex) {
             System.out.println("erro "+ex.getMessage());
         }
     }
     
     public static void criarMedicoEmUnidade(){
-            //Parto 3            
-            HospitalGeral h3 = new HospitalGeral();
+            //Parto 3        
+    
             h3.setNome("Quasar");
             hospitais = new HashMap<>();
             hospitais.put(3L, h3);
 
-            Unidade u3 = new Unidade();
             u3.setCodigo(3L);
             u3.setNome("UQ1");    
             unidades = new HashMap<>();
             unidades.put(3L, u3);            
       
-            Especialidade e3 = new Especialidade();
             e3.setNome("neonatologia");
             especialidades = new HashMap<>();
             especialidades.put(3L, e3);      
             
-            Medico me3 =  new Medico();
-            me3.setCRM("87282");
-            me3.setNome("JULIA MARTINS BONILHA SPIRANDELI");
-            me3.setCelular("(96) 4914-9718");
-            me3.setValorHora(87.28);
+            me3.setCRM("87284");
+            me3.setNome("Lucas Cunha Carvalho");
+            me3.setCelular("(19) 8535-7096");
+            me3.setValorHora(70.64);
             me3.setUnidade(u3);
             me3.setEspecialidade(e3);
             me3.setHospitalGeral(h3);
@@ -75,7 +92,7 @@ public class Hospital {
             u.getMedicos().add(me3);
             e.getMedicos().add(me3);
             medicos = new HashMap<>();
-            medicos.put(3L, me3);        
+            medicos.put(3L, me3);          
     }
     
     public static void instanciarObjetos() throws ParseException {
@@ -139,7 +156,7 @@ public class Hospital {
             partos.put(1L, p1);           
             
             BebePrematuro bp1 = new BebePrematuro();
-            bp1.setNome("Estevan Gomes Cardoso");
+            bp1.setNome("Estevan Gomes Ferreira");
             date = transformarStringToDate("04/09/2015");
             bp1.setDataNascimento(date);    
             Double prn = pesoRecemNascido();
@@ -154,16 +171,190 @@ public class Hospital {
             bp1.setMedico(me1);
             bp1.setParto(p1);
             bp1.setEspecialidade(e1);
+            bp1.setHospitalGeral(h1);
             m.getBebes().add(bp1);
             med.getBebes().add(bp1);
             p.getBebes().add(bp1);
             e.getBebes().add(bp1);
+            h.getBebes().add(bp1);
             bebes = new HashMap<>();
             bebes.put(1L, bp1);
             
 //******************************************************************************
+            //Parto 2         
+            HospitalGeral h2 = new HospitalGeral();
+            h2.setNome("Quasar");
+            hospitais = new HashMap<>();
+            hospitais.put(2L, h2);
 
-//            copiarLivro();
+            Unidade u2 = new Unidade();
+            u1.setCodigo(2L);
+            u1.setNome("UQ2");    
+            unidades = new HashMap<>();
+            unidades.put(2L, u2);            
+      
+            Especialidade e2= new Especialidade();
+            e2.setNome("obstetra");
+            especialidades = new HashMap<>();
+            especialidades.put(2L, e2);              
+           
+            Medico me2 =  new Medico();
+            me2.setCRM("87283");
+            me2.setNome("Julian Pereira Ribeiro");
+            me2.setCelular("(75) 2452-4919");
+            me2.setValorHora(75.80);
+            me2.setUnidade(u2);
+            me2.setEspecialidade(e2);
+            me2.setHospitalGeral(h2);
+            h.getMedicos().add(me2);
+            u.getMedicos().add(me2);
+            e.getMedicos().add(me2);
+            med.getMedicos().add(me2);
+            medicos = new HashMap<>();
+            medicos.put(2L, me2);
+            
+            Mae m2 = new Mae();
+            m2.setNome("Raissa Pereira Azevedo");
+            m2.setEndereco("Estrada Miazake, 1727, Cotia-SP, CEP: 06715-630");
+            m2.setTelefone("(11) 2154-8196");
+            Date date2 = transformarStringToDate("12/08/1984");
+            m2.setDataNascimento(date2);
+            maes = new HashMap<>();
+            maes.put(2L, m2);            
+            
+            Parto p2 = new Parto();
+            int hp2 = duracaoParto();
+            if(hp2==0){
+                hp2=1;
+            }
+            Long dp2 = (long) hp2;
+            p2.setDuracaoHoras(dp2);
+            int n2 = aleatorio();
+            if(n2==0){
+                p2.setComplicado(Boolean.FALSE);                
+            }
+            else{
+                p2.setComplicado(Boolean.TRUE);                
+            }
+            partos = new HashMap<>();
+            partos.put(2L, p2);           
+            
+            BebePrematuro bp2 = new BebePrematuro();
+            bp2.setNome("Renan Ribeiro Azevedo");
+            date2 = transformarStringToDate("12/03/2015");
+            bp2.setDataNascimento(date2);    
+            Double prn2 = pesoRecemNascido();
+            bp2.setPeso(prn2);
+            Double arn2 = alturaRecemNascido();
+            bp2.setAltura(arn2);
+            Long pre2 = verificarSeEPrematuro();
+            if(pre2<=36){
+                bp2.setSemanasGestacao(pre2);            
+            }
+            bp2.setMae(m2);
+            bp2.setMedico(me2);
+            bp2.setParto(p2);
+            bp2.setEspecialidade(e2);
+            bp2.setHospitalGeral(h2);
+            m.getBebes().add(bp2);
+            med.getBebes().add(bp2);
+            p.getBebes().add(bp2);
+            e.getBebes().add(bp2);
+            h.getBebes().add(bp2);
+            bebes = new HashMap<>();
+            bebes.put(2L, bp2);
+            
+//******************************************************************************
+            criarMedicoEmUnidade();
+            
+            //Parto 3        
+//            HospitalGeral h3 = new HospitalGeral();
+//            h3.setNome("Quasar");
+//            hospitais = new HashMap<>();
+//            hospitais.put(3L, h3);
+//
+//            Unidade u3 = new Unidade();
+//            u3.setCodigo(3L);
+//            u3.setNome("UQ1");    
+//            unidades = new HashMap<>();
+//            unidades.put(3L, u3);            
+//      
+//            Especialidade e3 = new Especialidade();
+//            e3.setNome("neonatologia");
+//            especialidades = new HashMap<>();
+//            especialidades.put(3L, e3);      
+//            
+//            Medico me3 = new Medico();
+//            me3.setCRM("87284");
+//            me3.setNome("Lucas Cunha Carvalho");
+//            me3.setCelular("(19) 8535-7096");
+//            me3.setValorHora(70.64);
+//            me3.setUnidade(u3);
+//            me3.setEspecialidade(e3);
+//            me3.setHospitalGeral(h3);
+//            h.getMedicos().add(me3);
+//            u.getMedicos().add(me3);
+//            e.getMedicos().add(me3);
+//            medicos = new HashMap<>();
+//            medicos.put(3L, me3);                  
+            
+            Mae m3 = new Mae();
+            m3.setNome("Letícia Almeida Melo");
+            m3.setEndereco("Rua Princesa Isabel, 1717, Camaragibe-PE, CEP: 54762-725");
+            m3.setTelefone("(81) 5488-7183");
+            Date date3 = transformarStringToDate("14/01/1984");
+            m3.setDataNascimento(date3);
+            maes = new HashMap<>();
+            maes.put(3L, m3);            
+            
+            Parto p3 = new Parto();
+            int hp3 = duracaoParto();
+            if(hp3==0){
+                hp3=1;
+            }
+            Long dp3 = (long) hp3;
+            p3.setDuracaoHoras(dp3);
+            int n3 = aleatorio();
+            if(n3==0){
+                p3.setComplicado(Boolean.FALSE);                
+            }
+            else{
+                p3.setComplicado(Boolean.TRUE);                
+            }
+            partos = new HashMap<>();
+            partos.put(3L, p3);           
+            
+            BebePrematuro bp3 = new BebePrematuro();
+            bp3.setNome("Isabella Cavalcanti Melo");
+            date3 = transformarStringToDate("16/08/2015");
+            bp3.setDataNascimento(date3);    
+            Double prn3 = pesoRecemNascido();
+            bp3.setPeso(prn3);
+            Double arn3 = alturaRecemNascido();
+            bp3.setAltura(arn3);
+            Long pre3 = verificarSeEPrematuro();
+            if(pre3<=36){
+                bp3.setSemanasGestacao(pre3);            
+            }
+//            Medico          me4 = new Medico();
+//            Mae             m4 = new Mae();
+//            Especialidade   e4 = new Especialidade();
+//            HospitalGeral   h4 = new HospitalGeral();
+            bp3.setMae(m3);
+            bp3.setMedico(me3);
+            bp3.setParto(p3);
+            bp3.setEspecialidade(e3);
+            bp3.setHospitalGeral(h3);
+            m.getBebes().add(bp3);
+            med.getBebes().add(bp3);
+            p.getBebes().add(bp3);
+            e.getBebes().add(bp3);
+            h.getBebes().add(bp3);
+            bebes = new HashMap<>();
+            bebes.put(3L, bp3);
+            
+            
+//******************************************************************************
             
         } catch (Exception ex) {
             System.out.println("erro main "+ex.getMessage());

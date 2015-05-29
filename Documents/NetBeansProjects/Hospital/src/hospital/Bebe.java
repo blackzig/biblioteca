@@ -22,6 +22,7 @@ public class Bebe {
     private Medico          medico;
     private Parto           parto;
     private Especialidade   especialidade;
+    private HospitalGeral   hospitalGeral;
     
     
     /**
@@ -134,6 +135,20 @@ public class Bebe {
      */
     public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
+    }
+
+    /**
+     * @return the hospitalGeral
+     */
+    public HospitalGeral getHospitalGeral() {
+        return hospitalGeral;
+    }
+
+    /**
+     * @param hospitalGeral the hospitalGeral to set
+     */
+    public void setHospitalGeral(HospitalGeral hospitalGeral) {
+        this.hospitalGeral = hospitalGeral;
     }
     
 }
